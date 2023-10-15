@@ -18,17 +18,17 @@ import java.util.List;
 @CrossOrigin("*")
 @RestController
 public class StudentController {
-    @Autowired
+
     private StorageService storageService;
 
     List<String> files = new ArrayList<String>();
     @Autowired
     private StudentRepo studentRepo;
 
-    @GetMapping(path = "/photoSalle/{id}",produces = MediaType.IMAGE_JPEG_VALUE)
+    @GetMapping(path = "/photoStudent/{id}",produces = MediaType.IMAGE_JPEG_VALUE)
     public byte[] getPhoto(@PathVariable("id") Long id) throws Exception{
         Student student=studentRepo.findById(id).get();
-        return Files.readAllBytes(Paths.get(System.getProperty("user.home")+"/roomBooking/rooms/"+student.getPhotoName()));
+        return Files.readAllBytes(Paths.get(System.getProperty("user.home")+"/schoolApp/students/"+student.getPhotoName()));
     }
     @PostMapping(path = "/uploadPhoto")
     public ResponseEntity<String> uploadPhoto(@RequestParam("file") MultipartFile file) {
